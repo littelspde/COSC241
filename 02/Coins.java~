@@ -1,0 +1,99 @@
+package week02;
+
+import java.util.Random;
+
+public class Coins{
+
+    public static final boolean HEADS = true;
+    public static final boolean TAILS = false;
+
+    private boolean[] coins;
+    public int numOfHeads;
+
+    public Coins(boolean[] coins) {
+        this.coins = coins;
+    }
+
+    public Coins(String c){
+        int stringLength = c.length();
+        boolean[] coinsIn = new  boolean[stringLength];
+
+        for (int x=0; x<stringLength-1; x++){
+            if ( c.charAt(x) == 'H'){
+                    coinsIn[x] = HEADS;
+                }
+            else if (c.charAt(x) == 'T'){
+                    coinsIn[x] = TAILS;
+                }   
+        }
+        this.coins = coinsIn;
+    }
+
+    public Coins(int length){
+        Random r = new Random();
+        boolean[] coinsIn = new boolean[length];
+        for (int x=0; x<length-1; x++){
+            coinsIn[x] = r.nextBoolean();
+        }
+        this.coins = coinsIn;
+        
+
+    }
+
+    public int countHeads(){
+        numOfHeads = 0;
+        for (boolean c:coins){
+            if (c == true){
+                numOfHeads++;
+            }
+        }
+        return numOfHeads;
+
+    }
+
+     public String toString(){
+        String coinList = "";
+        for (boolean c:coins){
+            if (c == true){
+                coinList += "H";
+            }
+            else{
+                coinList += "T";
+            }
+        }
+        return coinList;
+        }
+
+    public int countRuns(){
+        int numRuns = 0;
+        boolean previous = false;
+        if (coins[0] == false){
+            previous = true;
+        }
+            
+        for (boolean c:coins){
+            
+            if (c != previous){
+                numRuns++;
+            }
+            previous = c;
+        }
+        return numRuns;
+    }
+            
+
+    public static void main (String[] args){
+
+        boolean[] b = {HEADS, TAILS, HEADS, HEADS, TAILS};
+        Coins c = new Coins(b);
+        Coins c2 = new Coins("HTHHT");
+        Coins c3 = new Coins(5);
+        Coins c4 = new Coins("TTHTHHHTTT");
+        System.out.println(c4.toString());
+        System.out.println(c4.countHeads());
+        System.out.println(c4.countRuns());
+
+    }
+
+
+}

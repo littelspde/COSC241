@@ -1,0 +1,76 @@
+package week11;
+
+/**
+ *  A quick sort implementation which is able to be observed through its
+ *  Sorter superclass.
+ *
+ * @author Iain Hewson
+ */
+public class QuickSort extends Sorter {
+
+    /**
+     *  Create a new QuickSort sorter with the given integers to sort.
+     * 
+     * @param nums the integers to sort.
+     */
+    public QuickSort(Integer[] nums) {
+        super(nums); // pass nums[] to the superclass Sort
+    }
+
+    /**
+     * Sort the integers (which are stored in the parent Sorter class). 
+     */
+    public void sortNums() {
+        // int i, j, comparisons, and nums[] are all protected datafields in
+        // the superclass Sort so we can use them without declaring them
+        comparisons = 0;
+        quickSort(0, nums.length - 1);
+    }
+
+    /** Recursively sorts the array around pivot P.
+        @param left The starting index of subarray to be split and sorted.
+        @param right The ending index of the subarray to be split and sorted.
+    */
+    private void quickSort(int left, int right){
+        if (left < right){
+            int p = partition(left, right);
+            quickSort(left, p);
+            quickSort(p+1, right);
+            update();
+        }
+    }
+
+    /** Find the pivot point to split the array around.
+        @param left The starting index of the array to be partitioned.
+        @param right The ending index of the array to be partitioned.
+    */
+    private int partition(int left, int right){
+        Integer pivot = nums[left];
+        int hole = left;
+        int i = left+1;
+        int j = right;
+
+        while(true){
+            while (++comparisons > 0 && j > hole && nums[j] >= pivot){
+                j--;
+                update();
+            }
+            if(++comparisons > 0 && j == hole){
+                break;
+            }
+            nums[hole] = nums[j];
+            hole = j;
+            while (++comparisons > 0 && i < hole && nums[i] < pivot){
+                i++;
+                update();
+            }
+            if (++comparisons > 0 && i == hole){
+                break;
+            }
+            nums[hole] = nums[i];
+            hole = i;
+        }
+        nums[hole] = pivot;
+        return hole;
+    }
+}

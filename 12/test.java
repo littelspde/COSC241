@@ -1,0 +1,40 @@
+public void sortNums(){
+
+    int temp = 0;
+    int smallest = 0;
+    int target = 0;
+
+    for (int p = 0; p < nums.length; p++){
+        smallest = nums[p];
+        target = p;
+
+        for(int j = p+1; j < nums.length; j++){
+            if (nums [j] < smallest){
+                smallest = nums[j];
+                target = j;
+            }
+        }
+
+        temp = nums[p];
+        nums[p] = nums[target];
+        nums[target] = temp;
+        smallest = nums[p];
+    }
+}
+
+public vid sortNums(){
+
+    for(int p=1; p < nums.length; p++){
+        int key = nums[p];
+        int j = p-1;
+
+        while (j>= 0 && nums[j] > key){
+            nums[j+1] = nums[j];
+            j--;
+            update();
+        }
+
+        nums[j+1] = key;
+        update();
+    }
+}

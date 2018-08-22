@@ -1,0 +1,48 @@
+package week08;
+
+import java.util.*;
+import java.io.*;
+
+public class FrequencyGenerator implements WordGenerator {
+
+    private Random random;
+
+    ArrayList<Double> weights = new ArrayList<Double>();
+
+    File fileIn = new File("letter-frequencies.txt");
+    Scanner inputFile;
+    
+    public FrequencyGenerator(Random r) {
+        random = r;
+        try{
+            inputFile = new Scanner(fileIn);
+        } catch (FileNotFoundException fnf){
+            System.out.println(fnf);
+        }
+        while(inputFile.hasNext()){
+            weights.add(inputFile.nextDouble());
+        }
+
+    }
+
+    public int chooseIndex(ArrayList<Double> w){
+        int count = 0;
+        Double  r = random.nextDouble();
+        while (r > w.get(count)){
+            r = r - w.get(count);
+            count++;
+        }
+        return count;
+    }
+    
+    public String nextWord(int n){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i <n; i++){
+            char c = (char) ('a' + chooseIndex(weights));
+            result.append(c);
+        }
+        
+        return result.toString();
+    }
+
+}

@@ -1,0 +1,69 @@
+1. Wouldn't compile, error message:
+
+Hi.java:5: error: class hi is public, should be declared in a file named hi.java
+public class hi {
+^
+1 error
+
+2. Compiled, output now "hello, World!"
+
+3. Wouldn't compile error message:
+
+Hi.java:9: error: ')' expected
+       System.out. println(Hello, World!");
+                                       ^
+Hi.java:9: error: unclosed string literal
+       System.out. println(Hello, World!");
+                                        ^
+Hi.java:9: error: ';' expected
+       System.out. println(Hello, World!");
+                                           ^
+Hi.java:11: error: reached end of file while parsing
+}
+ ^
+4 errors
+
+4. Wouldn't compile, error message:
+
+Hi.java:9: error: unclosed string literal
+       System.out. println("Hello, World!);
+                           ^
+Hi.java:9: error: ';' expected
+       System.out. println("Hello, World!);
+                                           ^
+Hi.java:11: error: reached end of file while parsing
+}
+ ^
+3 errors
+
+5. Compiled, runtime error :
+
+Error: Main method not found in class Hi, please define the main method as:
+   public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+
+6. Wouldn't complie, error message:
+
+Hi.java:9: error: cannot find symbol
+       System.out.printline("Hello, World!");
+                 ^
+  symbol:   method printline(String)
+  location: variable out of type PrintStream
+1 error
+
+7: Wouldn't complie, error message:
+
+Hi.java:9: error: ';' expected
+       System.out.println("Hello, World!")
+                                          ^
+1 error
+
+
+8: Wouldn't complie, error message:
+
+Hi.java:10: error: reached end of file while parsing
+    }
+     ^
+1 error
+
+
